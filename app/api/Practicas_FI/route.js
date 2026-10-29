@@ -9,7 +9,7 @@ export async function GET() {
         const pool = await getConnection();
 
         const resultado = await pool.request().query(
-            "SELECT [practica_id]  ,[Presupuesto] ,[Viaticos] FROM [dbo].[Practica]"
+            "SELECT [practica_id] ,[Presupuesto] ,[Viaticos],[fecha_inicio],[fecha_fin],[destino] FROM [dbo].[Practica]"
         );
 
         return NextResponse.json({
