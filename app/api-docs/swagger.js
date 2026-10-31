@@ -29,7 +29,6 @@ export const swaggerSpec = {
                     }
                 }
             },
-
             post: {
                 summary: "Registrar practica",
                 tags: ["Practicas"],
@@ -99,10 +98,25 @@ export const swaggerSpec = {
                 }
             }
         },
+        "/api/Transportes": {
+            get: {
+                summary: "Consultar Transportes",
+                tags: ["Transportes"],
+                description: "Devuelve la lista de todos los transportes registrados.",
+                responses: {
+                    "200": {
+                        description: "Consulta exitosa de transportes"
+                    },
+                    "500": {
+                        description: "Error de servidor"
+                    }
+                }
+            }
+        },
 
         "/api/Practicas_FI/con-direccion": {
             post: {
-                summary: "Registrar practica con dirección",
+                summary: "Registrar transporte",
                 description:
                     "Ejecuta el procedimiento almacenado sp_RegistrarTransporte",
                 tags: ["Transportes"],

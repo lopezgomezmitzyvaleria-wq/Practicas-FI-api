@@ -13,7 +13,7 @@ export async function GET() {
         );
 
         return NextResponse.json({
-            status:"success",
+            status: "success",
             data: resultado.recordset
         });
 
@@ -31,16 +31,17 @@ export async function GET() {
 }
 
 
+
 export async function POST(request) {
     try {
         const datos = await request.json();
         const {
             transporte_id,
-                    tipo_transporte_id,
-                    nombre_chofer,
-                    capacidad_max,
-                    placa,
-                    empresa
+            tipo_transporte_id,
+            nombre_chofer,
+            capacidad_max,
+            placa,
+            empresa
         } = datos;
 
         //Mecanismos de protección
@@ -48,31 +49,26 @@ export async function POST(request) {
         const pool = await getConnection();
 
         const resultado = await pool.request()
-            .input("transporte_id", sql.Int,transporte_id)
             .input("tipo_transporte", sql.Int, tipo_transporte_id)
             .input("chofer", sql.NVarChar(30), nombre_chofer)
             .input("capacidad", sql.Int, capacidad_max)
             .input("placas", sql.NVarChar(20), placa)
             .input("empresa", sql.NVarChar(100), empresa)
-            .query(`INSERT INTO dbo.Transporte (
-                    transporte_id,
+            .query(`INSERT INTO dbo.Transporte (                    
                     tipo_transporte_id,
                     nombre_chofer,
                     capacidad_max,
                     placa,
                     empresa
                 )
-                OUTPUT
-
-                    INSERTED.transporte_id,
+                OUTPUT                    
                     INSERTED.tipo_transporte_id,
                     INSERTED.nombre_chofer,
                     INSERTED.capacidad_max,
                     INSERTED.placa,
                     INSERTED.empresa
                 VALUES
-                    (
-                    @transporte_id,
+                    (                    
                     @tipo_transporte,
                     @chofer,
                     @capacidad,
